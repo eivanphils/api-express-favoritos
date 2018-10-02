@@ -1,0 +1,20 @@
+{
+  "name": "api-restful-favoritos",
+  "version": "1.0.0",
+  "description": "api en node express ",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Phils Garcia <pgarciaq@avla.com>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.17"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
