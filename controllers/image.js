@@ -1,6 +1,8 @@
 'use strict';
+const path = require('path');
 const Image = require('../models/image.model');
 const Favorito = require('../models/favorito.model');
+const fs = require('fs');
 
 function getImage(req, res) {
     let imageId = req.params.id;
@@ -114,10 +116,51 @@ function deleteImage(req, res) {
     });
 }
 
+function uploadImage(req, res){
+    let imageId = req.params.id;
+    let fileName = null;
+    if (req.files){
+        let filePath = req.files.image.path;
+        let fileSplit = filePath.split('/');
+        let fileName = fileSplit[1]
+
+        Image.findByIdAndUpdate(imageId, {picture: fileName}, (err, imageStored)=>{
+            if (err){
+                res.status(500).send({message: 'Error al guardar la imagen'});
+            }else{
+                if(!imageStored){
+                    res.status(404).send({message: 'No hay imagen'});
+                }else{
+                    res.status(200).send({
+                        message: 'image guardado exitosamente',
+                        image: imageStored
+                    });
+                }
+            }
+        });
+    }else{
+        res.status(200).send({message: 'No a subido ninguna imagen'})
+    }
+}
+
+function getImageFile(req, res){
+    let imageFile = req.params.imageFile;
+
+    fs.exists('./uploads/' + imageFile, function(exists){
+        if (exists){
+            res.sendFile(path.resolve('./uploads/' +  imageFile));
+        }else{
+            res.status(200).send({message: 'EL archivo no existe'});
+        }
+    });
+}
+
 module.exports = {
     getImage,
     getImages,
     saveImage,
     updateImage,
-    deleteImage
+    deleteImage,
+    uploadImage,
+    getImageFile
 };

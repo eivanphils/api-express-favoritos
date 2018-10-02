@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const ImageSchema = Schema({
     title: String,
-    path: String,
+    picture: String,
     favorito: {type: Schema.ObjectId, ref: 'Favorito'}
 });
 
