@@ -3,7 +3,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const api = require('./routes/favorito');
+const favorito_routes = require('./routes/favorito');
+const image_routes = require('./routes/image')
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -15,7 +16,8 @@ app.use((req, res, next) => {
     res.header('Allow', 'GET, PUT, POST, OPTIONS, DELETE');
     next();
 });
-app.use('/api', api);
+app.use('/api', favorito_routes);
+app.use('/api', image_routes);
 
 
 module.exports = app;
