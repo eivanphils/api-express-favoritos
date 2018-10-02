@@ -16,7 +16,9 @@ function getImage(req, res) {
                     if (err){
                         res.status(500).send({message: 'Error en la peticion'});
                     }else{
-                        res.status(200).send({ message: 'imagen encontrado', data: image });
+                        res.status(200).send({
+                            message: 'imagen encontrado',
+                            image: image });
                     }
                 })
             }
@@ -45,7 +47,7 @@ function getImages(req, res) {
             }else{
                 res.status(200).send({
                     message: 'imagenes con favorito',
-                    data: images
+                    images: images
                 });
             }
         }
@@ -69,7 +71,27 @@ function saveImage(req, res) {
             }else{
                 res.status(200).send({
                     message: 'image guardado exitosamente',
-                    data: image
+                    image: image
+                });
+            }
+        }
+    });
+}
+
+function updateImage(req, res) {
+    let params = req.body;
+    let imageId = req.params.id;
+
+    Image.findByIdAndUpdate(imageId, params, (err, imageStored)=>{
+        if (err){
+            res.status(500).send({message: 'Error al guardar la imagen'});
+        }else{
+            if(!imageStored){
+                res.status(404).send({message: 'No hay marcadores'});
+            }else{
+                res.status(200).send({
+                    message: 'image guardado exitosamente',
+                    image: imageStored
                 });
             }
         }
@@ -79,5 +101,6 @@ function saveImage(req, res) {
 module.exports = {
     getImage,
     getImages,
-    saveImage
+    saveImage,
+    updateImage
 };
