@@ -1,14 +1,6 @@
 'use strict'
 const Favorito = require('../models/favorito.model');
 
-function prueba(req, res) {
-    let name = '';
-    if (req.params.name) {
-        name = req.params.name;
-    }
-    res.status(200).send({message: 'Hola mundoooo! para ' + name})
-}
-
 function getFavorito(req, res) {
     let favoritoId = req.params.id;
 
@@ -48,7 +40,7 @@ function saveFavoritos(req, res) {
     favorito.title = params.title;
     favorito.description = params.description;
     favorito.url = params.url;
-    favorito.image = params.image;
+    // favorito.image = params.image;
 
     favorito.save((err, favorito)=>{
         if (err){
@@ -98,7 +90,6 @@ function deleteFavoritos(req, res) {
 }
 
 module.exports = {
-    prueba,
     getFavorito,
     getFavoritos,
     saveFavoritos,

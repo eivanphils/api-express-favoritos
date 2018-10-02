@@ -7,7 +7,6 @@ const FavoritoSchema = Schema({
     title: String,
     description: String,
     url: String,
-    image: String,
     star: {type: Number, default: 0}
 });
 
