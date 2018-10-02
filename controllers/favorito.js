@@ -70,20 +70,14 @@ function updateFavoritos(req, res) {
 function deleteFavoritos(req, res) {
     let favoritoId = req.params.id;
 
-    Favorito.findById(favoritoId, (err, favorito) =>{
+    Favorito.findByIdAndRemove(favoritoId, (err, favorito) =>{
         if (err){
             res.status(500).send({message: 'Error al eliminar el favorito'});
         }else{
             if(favorito.length === 0){
                 res.status(404).send({message: 'No existe el favorito a eliminar'});
             }else{
-                favorito.remove(err =>{
-                    if (err){
-                        res.status(500).send({message: 'Error al borrar el favorito'});
-                    }else{
-                        res.status(200).send({message: 'Favorito eliminado'});
-                    }
-                });
+                res.status(200).send({message: 'Favorito eliminado'});
             }
         }
     });
