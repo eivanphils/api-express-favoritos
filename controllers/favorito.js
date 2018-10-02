@@ -8,7 +8,7 @@ function getFavorito(req, res) {
         if (err){
             res.status(500).send({message: 'Error al devolver el marcador'});
         }else{
-            if(favorito.length === 0){
+            if(!favoritos){
                 res.status(404).send({message: 'No existe el marcador'});
             }else{
                 res.status(200).send({favorito});
@@ -22,7 +22,7 @@ function getFavoritos(req, res) {
        if (err){
            res.status(500).send({message: 'Error al devolver los marcadores'});
        }else{
-           if(favoritos.length === 0){
+           if(!favoritos){
                res.status(404).send({message: 'No hay marcadores'});
            }else{
                res.status(200).send({
@@ -74,7 +74,7 @@ function deleteFavoritos(req, res) {
         if (err){
             res.status(500).send({message: 'Error al eliminar el favorito'});
         }else{
-            if(favorito.length === 0){
+            if(!favorito){
                 res.status(404).send({message: 'No existe el favorito a eliminar'});
             }else{
                 res.status(200).send({message: 'Favorito eliminado'});
