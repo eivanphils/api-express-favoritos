@@ -98,9 +98,26 @@ function updateImage(req, res) {
     });
 }
 
+function deleteImage(req, res) {
+    let imageId = req.params.id;
+
+    Image.findByIdAndRemove(imageId, (err, image) =>{
+        if (err){
+            res.status(500).send({message: 'Error al eliminar la imagen'});
+        }else{
+            if(!image){
+                res.status(404).send({message: 'No existe la imagen a eliminar'});
+            }else{
+                res.status(200).send({message: 'Imagen eliminado'});
+            }
+        }
+    });
+}
+
 module.exports = {
     getImage,
     getImages,
     saveImage,
-    updateImage
+    updateImage,
+    deleteImage
 };
