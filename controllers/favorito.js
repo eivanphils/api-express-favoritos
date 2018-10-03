@@ -8,7 +8,7 @@ function getFavorito(req, res) {
         if (err){
             res.status(500).send({message: 'Error al devolver el marcador'});
         }else{
-            if(!favoritos){
+            if(!favorito){
                 res.status(404).send({message: 'No existe el marcador'});
             }else{
                 res.status(200).send({favorito});
